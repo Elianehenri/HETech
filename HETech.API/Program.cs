@@ -1,5 +1,9 @@
+using HETech.Domain.Interfaces.Repositories;
+using HETech.Domain.Interfaces.Services;
 using HETech.Domain.Security;
+using HETech.Domain.Services;
 using HETech.Infra.DataBase.Context;
+using HETech.Infra.DataBase.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -20,6 +24,10 @@ builder.Services.AddDbContext<HETechDbContext>(options => options.UseSqlServer(c
 
 //na hora de inicializar a aplicacao, ela esta pegando a configuracao do jwt la no appsettings.json e colocando na classe JWTKey
 var jwtsettings = builder.Configuration.GetRequiredSection("JWT").Get<JWTKey>();
+
+//configurar injeçao de dependencia
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 
 //acessando a chave de seguranca
