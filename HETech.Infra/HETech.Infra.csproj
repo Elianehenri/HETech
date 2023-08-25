@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <Folder Include="DataBase\Mapping\" />
-    <Folder Include="DataBase\Repository\" />
   </ItemGroup>
 
 </Project>
