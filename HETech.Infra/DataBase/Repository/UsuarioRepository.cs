@@ -22,9 +22,9 @@ namespace HETech.Infra.DataBase.Repository
         }
 
         //excluir um usuario
-        public void DeletarUsuario(int idusuario)
+        public void DeletarUsuario(Usuario usuario)
         {
-            _context.Usuarios.Remove(_context.Usuarios.Find(idusuario));
+            _context.Usuarios.Remove(usuario);
             _context.SaveChanges();
         }
 

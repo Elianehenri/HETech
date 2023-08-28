@@ -1,4 +1,5 @@
 ﻿using HETech.Domain.Dtos;
+using HETech.Domain.Exceptions;
 using HETech.Domain.Interfaces.Services;
 using HETech.Domain.Security;
 using HETech.Infra.DataBase.Context;
@@ -13,15 +14,11 @@ namespace HETech.API.Controllers
     {
         //controller de log
         private readonly ILogger<AuthController> _logger;
-        private readonly IConfiguration _configuration;
-        private readonly HETechDbContext _context;
         private readonly IUsuarioService _usuarioService;
 
-        public AuthController(ILogger<AuthController> logger, IConfiguration configuration, HETechDbContext context, IUsuarioService usuarioService)
+        public AuthController(ILogger<AuthController> logger, IUsuarioService usuarioService)
         {
             _logger = logger;
-            _configuration = configuration;
-            _context = context;
             _usuarioService = usuarioService;
         }
 
@@ -56,59 +53,33 @@ namespace HETech.API.Controllers
         {
 
             try
-            {       //verificar se esta preenchido correto
-                if (!String.IsNullOrEmpty(loginRequisicaoDto.Password) && !String.IsNullOrEmpty(loginRequisicaoDto.Email) &&
-                    //com espaço em branco
-                    !String.IsNullOrWhiteSpace(loginRequisicaoDto.Password) && !String.IsNullOrWhiteSpace(loginRequisicaoDto.Email))
+            {
+                if (loginRequisicaoDto == null)
                 {
-
-                    //verificar se usuario e senha existe no banco de dados
-                    var usuario = _usuarioService.GetUsuarioPorLoginSenha(loginRequisicaoDto.Email, loginRequisicaoDto.Password);
-
-                    if (usuario != null)
-                    {
-
-                        return Ok(new LoginRespostaDto()
-                        {
-                            Email = usuario.Email,
-                            Name = usuario.Name,
-                            Token = TokenService.GenerateToken(usuario, _configuration["JWT:SecretKey"])
-                        });
-
-                    }
-                    else
-                    {
-                        return BadRequest(new ErrorResponseDto()
-                        {
-                            Description = "Email ou senha inválido!",
-                            Status = StatusCodes.Status400BadRequest
-                        });
-                    }
+                    return BadRequest("Dados de login inválidos.");
                 }
-                else
-                {
-                    return BadRequest(new ErrorResponseDto()
-                    {
-                        Description = "Usuário não preencheu os campos de login corretamente",
-                        Status = StatusCodes.Status400BadRequest
-                    });
-                }
+
+                var usuario = _usuarioService.Login(loginRequisicaoDto);
+                return Ok(usuario);
             }
-
+            catch (InserirDadosException ex)
+            {
+                _logger.LogError("Ocorreu um erro no login: " + ex.Message);
+                return BadRequest("Email ou senha inválidos.");
+            }
             catch (Exception e)
             {
-                _logger.LogError("Ocorreu um erro no login: " + e.Message);
+                _logger.LogError("Ocorreu um erro no registro: " + e.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponseDto()
                 {
-                    Description = "Ocorreu um erro ao fazer o login",
+                    Description = "Ocorreu um erro ao fazer o registro",
                     Status = StatusCodes.Status500InternalServerError
                 });
             }
-
-            
-
-
         }
 
-    }
+
+        
+
+        }
 }
