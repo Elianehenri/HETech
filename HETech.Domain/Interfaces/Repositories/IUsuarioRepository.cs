@@ -19,6 +19,6 @@ namespace HETech.Domain.Interfaces.Repositories
 
         List<Usuario> GetUsuarioNome(string nome);//ok - usuario
 
-        void DeletarUsuario(int idusuario);
+        void DeletarUsuario(Usuario usuario);
     }
 }
