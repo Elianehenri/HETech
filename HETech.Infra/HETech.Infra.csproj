@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DataBase\Mapping\**" />
+    <EmbeddedResource Remove="DataBase\Mapping\**" />
+    <None Remove="DataBase\Mapping\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
       <PrivateAssets>all</PrivateAssets>
@@ -22,10 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HETech.Domain\HETech.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DataBase\Mapping\" />
   </ItemGroup>
 
 </Project>

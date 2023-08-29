@@ -15,13 +15,12 @@ namespace HETech.Domain.Services
 {
     public class UsuarioService : IUsuarioService
     {
-        private readonly ILogger<UsuarioService> _logger;
+       
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IConfiguration _configuration;
 
-        public UsuarioService(ILogger<UsuarioService> logger, IUsuarioRepository usuarioRepository, IConfiguration configuration)
+        public UsuarioService(IUsuarioRepository usuarioRepository, IConfiguration configuration)
         {
-            _logger = logger;
             _usuarioRepository = usuarioRepository;
             _configuration = configuration;
         }
