@@ -1,11 +1,12 @@
 ﻿
 
-using HETech.Domain.Models;
+using HETech.Domain.Dtos;
+
 
 namespace HETech.Domain.Interfaces.Services
 {
     public interface IProdutoVendaService
     {
-        void Cadastrar(int vendaId, ProdutoVenda produtovenda);
+        void CadastrarProdutoVenda(int vendaId, ProdutoVendaDto produtovenda);
     }
 }

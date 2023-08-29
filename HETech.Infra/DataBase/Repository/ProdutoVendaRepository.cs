@@ -1,11 +1,7 @@
 ﻿using HETech.Domain.Interfaces.Repositories;
 using HETech.Domain.Models;
 using HETech.Infra.DataBase.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace HETech.Infra.DataBase.Repository
 {
@@ -19,10 +15,15 @@ namespace HETech.Infra.DataBase.Repository
             _context = context;
         }
 
-        public void Cadastrar(int vendaId, ProdutoVenda produtovenda)
+        public void CadastrarProdutoVenda(int vendaId, ProdutoVenda produtovenda)
         {
             _context.ProdutoVendas.Add(produtovenda);
             _context.SaveChanges();
+
+           
         }
+
+
+
     }
 }

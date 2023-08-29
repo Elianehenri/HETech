@@ -5,6 +5,8 @@ namespace HETech.Domain.Interfaces.Repositories
 {
     public interface IProdutoVendaRepository
     {
-        void Cadastrar(int vendaId, ProdutoVenda produtovenda);
+       
+        void CadastrarProdutoVenda(int vendaId, ProdutoVenda produtovenda);
+        
     }
 }

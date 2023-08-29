@@ -18,6 +18,7 @@ namespace HETech.Infra.DataBase.Repository
             _context.Vendas.Add(venda);
             _context.SaveChanges();
         }
+        
 
         public void Deletar(int vendaId)
         {
@@ -32,10 +33,7 @@ namespace HETech.Infra.DataBase.Repository
 
         }
 
-        public ProdutoVenda ObterProdutoVendaPorId(int produtovendaId)
-        {
-            return _context.ProdutoVendas.Find(produtovendaId);
-        }
+       
 
         public List<Venda> ObtertodasVendas()
         {

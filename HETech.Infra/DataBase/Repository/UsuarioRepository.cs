@@ -28,7 +28,7 @@ namespace HETech.Infra.DataBase.Repository
             _context.SaveChanges();
         }
 
-        //faça a busca por nome
+        // busca por nome
         public List<Usuario> GetUsuarioNome(string nome)
         {
             return _context.Usuarios.Where(u => u.Name.Contains(nome)).ToList();
