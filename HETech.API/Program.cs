@@ -1,9 +1,6 @@
-using HETech.Domain.Interfaces.Repositories;
-using HETech.Domain.Interfaces.Services;
+using HETech.API.Config;
 using HETech.Domain.Security;
-using HETech.Domain.Services;
 using HETech.Infra.DataBase.Context;
-using HETech.Infra.DataBase.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -26,18 +23,10 @@ builder.Services.AddDbContext<HETechDbContext>(options => options.UseSqlServer(c
 var jwtsettings = builder.Configuration.GetRequiredSection("JWT").Get<JWTKey>();
 
 //configurar injeçao de dependencia
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
-builder.Services.AddScoped<ICategoriaService, CategoriaService>();
-builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
-builder.Services.AddScoped<IProdutoService, ProdutoService>();
-builder.Services.AddScoped<IProdutoVendaRepository, ProdutoVendaRepository>();
-builder.Services.AddScoped<IProdutoVendaService, ProdutoVendaService>();
-builder.Services.AddScoped<IVendaRepository, VendaRepository>();
-builder.Services.AddScoped<IVendaService, VendaService>();
-
-
+//repositorio
+RepositoryIoC.RegisterServices(builder.Services);
+//Service
+ServiceIoc.RegisterServices(builder.Services);
 
 //acessando a chave de seguranca
 var secretKey = Encoding.ASCII.GetBytes(jwtsettings.SecretKey);
