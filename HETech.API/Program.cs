@@ -28,6 +28,15 @@ var jwtsettings = builder.Configuration.GetRequiredSection("JWT").Get<JWTKey>();
 //configurar injeçao de dependencia
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
+builder.Services.AddScoped<IProdutoVendaRepository, ProdutoVendaRepository>();
+builder.Services.AddScoped<IProdutoVendaService, ProdutoVendaService>();
+builder.Services.AddScoped<IVendaRepository, VendaRepository>();
+builder.Services.AddScoped<IVendaService, VendaService>();
+
 
 
 //acessando a chave de seguranca
