@@ -8,7 +8,7 @@ namespace HETech.Domain.Interfaces.Repositories
         void Deletar(int vendaId);//ok - venda
         void AdicionarVenda(Venda venda);//ok - venda
         Venda ObterPorId(int vendaId);//ok - venda
-        ProdutoVenda ObterProdutoVendaPorId(int produtovendaId);//ok - venda
+        
         List<Venda> ObtertodasVendas();//ok - venda
     }
 }

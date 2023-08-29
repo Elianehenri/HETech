@@ -11,14 +11,10 @@ namespace HETech.Domain.Services
     public class ProdutoService : IProdutoService
     {
         private readonly IProdutoRepository _produtoRepository;
-        private readonly ILogger<ProdutoService> _logger;
-        private readonly IConfiguration _configuration;
 
-        public ProdutoService(IProdutoRepository produtoRepository, ILogger<ProdutoService> logger, IConfiguration configuration)
+        public ProdutoService(IProdutoRepository produtoRepository)
         {
             _produtoRepository = produtoRepository;
-            _logger = logger;
-            _configuration = configuration;
         }
 
         public void Atualizar(ProdutoAtualizarDto produtoatualizar)
